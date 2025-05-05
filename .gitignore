@@ -1,0 +1,26 @@
+# WordPress Core (don't track)
+wp-admin/
+wp-includes/
+wp-config.php
+index.php
+
+# Uploads
+wp-content/uploads/
+
+# Plugins (manage via composer)
+wp-content/plugins/*
+
+# Environment files
+.env
+*.sql
+
+# IDE
+.idea/
+.vscode/
+
+# Node
+node_modules/
+package-lock.json
+
+# OS files
+.DS_Store
