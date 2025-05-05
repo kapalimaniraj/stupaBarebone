@@ -16,10 +16,23 @@ define( 'CHILD_THEME_STUPACHILD_VERSION', '1.0.0' );
 /**
  * Enqueue styles
  */
-function child_enqueue_styles() {
-
-	wp_enqueue_style( 'stupachild-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_STUPACHILD_VERSION, 'all' );
-
+function stupa_barebone_enqueue_styles() {
+    wp_enqueue_style('astra-parent', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style('astra-child', get_stylesheet_directory_uri() . '/style.css');
 }
 
-add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 15 );
+add_action( 'wp_enqueue_scripts', 'stupa_barebone_enqueue_styles', 15 );
+
+// 2. Define active features (toggle with true/false)
+$features = [
+    'lazyload'      => true,  // Enabled
+    'transitions'   => false, // Disabled
+    'skeletons'     => false  // Disabled
+];
+
+// 3. Load feature files conditionally
+foreach ($features as $feature => $is_active) {
+    if ($is_active) {
+        require_once get_stylesheet_directory() . "/inc/features/{$feature}.php";
+    }
+}
